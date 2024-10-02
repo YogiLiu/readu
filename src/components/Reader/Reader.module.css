@@ -1,0 +1,10 @@
+.Reader {
+  p {
+    text-indent: 2rem;
+  }
+
+  blockquote p {
+    text-indent: 4rem;
+    font-style: italic;
+  }
+}

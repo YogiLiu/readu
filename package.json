@@ -1,0 +1,37 @@
+{
+  "name": "readu",
+  "type": "module",
+  "scripts": {
+    "prepare": "panda codegen",
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "version": "vinxi version",
+    "fmt": "prettier --write .",
+    "lint": "eslint --fix ."
+  },
+  "dependencies": {
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.14.1",
+    "@solidjs/start": "^1.0.6",
+    "cheerio": "^1.0.0",
+    "he": "^1.2.0",
+    "solid-js": "^1.8.18",
+    "vinxi": "^0.4.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@iconify-json/ph": "^1.2.0",
+    "@pandacss/dev": "^0.46.1",
+    "@types/he": "^1.2.3",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-solid": "^0.14.3",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.7.0",
+    "unplugin-icons": "^0.19.3"
+  }
+}
