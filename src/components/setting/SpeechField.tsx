@@ -59,7 +59,7 @@ const SpeechField: Component<Props> = (props) => {
         setStatus(Status.READY)
         throw e
       })
-    audioEl.src = URL.createObjectURL(new Blob([audio], { type: 'audio/mpeg' }))
+    audioEl.src = URL.createObjectURL(audio)
     audioEl.addEventListener('ended', () => {
       setStatus(Status.READY)
     })

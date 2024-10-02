@@ -102,27 +102,23 @@ const createSSML = (voice: Voice, text: string, rate: number): string => {
   )
 }
 
-const getAudio = async (
+const fetchAudio = async (
   text: string,
   voice: Voice,
   region: string,
   key: string,
-  rate?: number,
-): Promise<ArrayBuffer> => {
-  text = text.trim()
-  if (!text) {
-    return new ArrayBuffer(0)
-  }
+  rate: number,
+): Promise<Blob> => {
   const headers = getHeaders(key)
   headers['Content-Type'] = 'application/ssml+xml'
   headers['X-Microsoft-OutputFormat'] = 'audio-48khz-192kbitrate-mono-mp3'
-  const ssml = createSSML(voice, text, rate || 1)
+  const ssml = createSSML(voice, text, rate)
   const endpoint = getAudioEndpoint(region)
   const res = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: ssml,
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(10*1000),
   }).catch((e) =>
     Promise.reject(new AzureError('can not fetch audio', { cause: e })),
   )
@@ -149,7 +145,21 @@ const getAudio = async (
     }
     throw new AzureError(`${res.status}: ${reason}`)
   }
-  return await res.arrayBuffer()
+  return await res.blob()
+}
+
+const getAudio = async (
+  text: string,
+  voice: Voice,
+  region: string,
+  key: string,
+  rate?: number,
+): Promise<Blob> => {
+  text = text.trim()
+  if (!text) {
+    return new Blob([], { type: 'audio/mp3' })
+  }
+  return fetchAudio(text, voice, region, key, rate || 1)
 }
 
 export default {
