@@ -60,10 +60,11 @@ const Message: Component<{ error: boolean; message: string }> = (props) => {
     props.error ? PhSealWarningFill : PhSealCheckFill,
   )
   const color = createMemo(() => (props.error ? errorColor : successColor))
+  const fontStyle = createMemo(() => (props.error ? italic : ''))
   return (
     <>
       <Dynamic component={icon()} class={color()} />
-      <styled.span marginLeft={'1'} classList={{ [italic]: props.error }}>
+      <styled.span marginLeft={'1'} class={fontStyle()}>
         {props.message}
       </styled.span>
     </>
